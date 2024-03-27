@@ -1,7 +1,5 @@
 package doublylinkedlist
 
-import "fmt"
-
 type Node struct {
 	Prev *Node
 	Val  any
@@ -87,7 +85,7 @@ func (list LinkedList) ToSlice() []any {
 }
 
 func Init() {
-	dll := LinkedList{}
+	/* dll := LinkedList{}
 
 	// dll.Prepend(5)
 	dll.Prepend(4)
@@ -102,5 +100,6 @@ func Init() {
 	dll.Insert(7, 8)
 
 	// fmt.Println(dll.Head.Next.Next.Prev.Prev)
-	fmt.Println(dll.ToSlice())
+	fmt.Println(dll.ToSlice()) */
+
 }
