@@ -1,7 +1,10 @@
 package main
 
-import "dst/singlylinkedlist"
+import (
+	"dst/doublylinkedlist"
+)
 
 func main() {
-	singlylinkedlist.Init()
+	// singlylinkedlist.Init()
+	doublylinkedlist.Init()
 }

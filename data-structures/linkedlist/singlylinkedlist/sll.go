@@ -5,8 +5,8 @@ import (
 )
 
 type Node struct {
-	Value any
-	Next  *Node
+	Val  any
+	Next *Node
 }
 
 type LinkedList struct {
@@ -16,7 +16,7 @@ type LinkedList struct {
 }
 
 func (list *LinkedList) Prepend(value any) {
-	newNode := &Node{Value: value}
+	newNode := &Node{Val: value}
 	if list.Head != nil {
 		newNode.Next = list.Head
 	} else {
@@ -27,7 +27,7 @@ func (list *LinkedList) Prepend(value any) {
 }
 
 func (list *LinkedList) Append(value any) {
-	newNode := &Node{Value: value}
+	newNode := &Node{Val: value}
 	if list.Head != nil {
 		list.Tail.Next = newNode
 	} else {
@@ -82,11 +82,11 @@ func (list LinkedList) Truncate(at int) *LinkedList {
 
 	truncList := &LinkedList{}
 	oldNode := list.Head
-	truncList.Append(oldNode.Value)
+	truncList.Append(oldNode.Val)
 
 	for i := 1; i < at; i++ {
 		oldNode = oldNode.Next
-		truncList.Append(oldNode.Value)
+		truncList.Append(oldNode.Val)
 	}
 
 	return truncList
@@ -102,7 +102,7 @@ func (list *LinkedList) Insert(index int, value any) {
 		return
 	}
 
-	newNode := &Node{Value: value}
+	newNode := &Node{Val: value}
 	resList := list.Truncate(index)
 	nodeAtIndex := list.NodeAt(index)
 
@@ -115,7 +115,7 @@ func (list *LinkedList) Insert(index int, value any) {
 }
 
 func (list LinkedList) ValueAt(index int) any {
-	return list.NodeAt(index).Value
+	return list.NodeAt(index).Val
 }
 
 func (list LinkedList) Length() int {
@@ -124,7 +124,7 @@ func (list LinkedList) Length() int {
 
 func (list LinkedList) Traverse(out func(any)) {
 	for n := list.Head; n != nil; n = n.Next {
-		out(n.Value)
+		out(n.Val)
 	}
 }
 
@@ -139,26 +139,26 @@ func (list LinkedList) ToSlice() []any {
 }
 
 func Init() {
-	ll := LinkedList{}
+	sll := LinkedList{}
 
-	ll.Prepend(6)
-	ll.Prepend(5)
-	ll.Append("dd")
-	ll.Append(9)
-	ll.Insert(0, 7)
-	ll.Insert(0, 6)
-	ll.Insert(3, 10)
-	ll.Prepend(2)
-	ll.Insert(7, 8)
-	ll.Insert(2, 5)
+	sll.Prepend(6)
+	sll.Prepend(5)
+	sll.Append("dd")
+	sll.Append(9)
+	sll.Insert(0, 7)
+	sll.Insert(0, 6)
+	sll.Insert(3, 10)
+	sll.Prepend(2)
+	sll.Insert(7, 8)
+	sll.Insert(2, 5)
 
-	/* lj, _ := json.Marshal(ll)
+	/* lj, _ := json.Marshal(sll)
 	os.Stdout.Write(append(lj, '\n')) */
 
-	/* ll.Traverse(func(v int) {
+	/* sll.Traverse(func(v int) {
 		fmt.Println(v)
 	}) */
 
-	fmt.Println(ll.ToSlice())
-	// fmt.Println(ll.Truncate(4).ToSlice())
+	fmt.Println(sll.ToSlice())
+	// fmt.Println(sll.Truncate(4).ToSlice())
 }
