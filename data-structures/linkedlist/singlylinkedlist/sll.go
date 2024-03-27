@@ -1,4 +1,4 @@
-package linkedlist
+package singlylinkedlist
 
 import (
 	"fmt"
@@ -161,5 +161,4 @@ func Init() {
 
 	fmt.Println(ll.ToSlice())
 	// fmt.Println(ll.Truncate(4).ToSlice())
-	// fmt.Printf("%+v\n", (ll.NodeAt(2)).Next.Next.Next)
 }

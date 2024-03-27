@@ -2,5 +2,6 @@ go 1.22.0
 
 use (
   .
-  ./data-structures/linkedlist
+  ./data-structures/linkedlist/singlylinkedlist
+  ./data-structures/linkedlist/doublylinkedlist
 )
