@@ -101,5 +101,4 @@ func Init() {
 
 	// fmt.Println(dll.Head.Next.Next.Prev.Prev)
 	fmt.Println(dll.ToSlice()) */
-
 }

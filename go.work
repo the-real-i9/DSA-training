@@ -4,4 +4,5 @@ use (
   .
   ./data-structures/linkedlist/singlylinkedlist
   ./data-structures/linkedlist/doublylinkedlist
+  ./use-cases/linkedlistuc
 )

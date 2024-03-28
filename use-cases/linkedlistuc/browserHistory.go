@@ -1,24 +1,24 @@
-package doublylinkedlist
+package linkedlistuc
 
-type WebPage struct {
+type webPage struct {
 	Title string
 	Body  string
 }
 
 type browserPage struct {
 	prev *browserPage
-	Page WebPage
+	Page webPage
 	next *browserPage
 }
 
-type BrowserHistory struct {
+type browserHistory struct {
 	head    *browserPage
 	tail    *browserPage
 	Current *browserPage
 	length  int
 }
 
-func (bh *BrowserHistory) Push(page WebPage) {
+func (bh *browserHistory) Push(page webPage) {
 	newPage := &browserPage{Page: page}
 
 	if bh.head == nil {
@@ -34,7 +34,7 @@ func (bh *BrowserHistory) Push(page WebPage) {
 	bh.length++
 }
 
-func (bh *BrowserHistory) Pop() {
+func (bh *browserHistory) Pop() {
 	if bh.length < 1 {
 		return
 	}
@@ -57,21 +57,21 @@ func (bh *BrowserHistory) Pop() {
 	bh.length--
 }
 
-func (bh *BrowserHistory) Forward() {
+func (bh *browserHistory) Forward() {
 	cp := bh.Current
 	if cp.next != nil {
 		bh.Current = cp.next
 	}
 }
 
-func (bh *BrowserHistory) Back() {
+func (bh *browserHistory) Back() {
 	cp := bh.Current
 	if cp.prev != nil {
 		bh.Current = cp.prev
 	}
 }
 
-func (bh *BrowserHistory) Go(step int) {
+func (bh *browserHistory) Go(step int) {
 	targetPage := bh.Current
 
 	if step < 0 {
