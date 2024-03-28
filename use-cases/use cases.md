@@ -20,7 +20,9 @@ When you need to manage data in a Last-in-First-Out (LIFO) manner.
 - Undo Mechanism
 - Expression Evaluation
 - Postfix Expression Evaluation
+- Depth-First Search (Traversal)
 - Backtracking Algorithms
+- Managing Recursive Algorithms
 - Browser History
 - Balanced parentheses checking
 - Syntax Parsing
@@ -58,3 +60,18 @@ Suitable for scenarios where efficient key-based retrieval of data is a signific
 - Serialization and Deserialization
 
 ## Tree
+- Directory and File System Structures
+- Hierarchichal Relationships
+- Expression Trees: Expression parsing and evaluation
+- Decision Trees
+- Syntax Trees in Programming Languates
+- Binary Search Trees in Databases
+- Routing Tables in Networking
+- Game Trees
+- HTML DOM
+- XML
+- HTML and XML Parsing
+- Heap Data Structure
+- Trie Data Structure
+- Database Indexing
+- Compression Algorithms: Huffman coding
