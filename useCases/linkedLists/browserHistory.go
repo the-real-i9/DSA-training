@@ -1,4 +1,4 @@
-package linkedlistuc
+package lluc
 
 type webPage struct {
 	Title string

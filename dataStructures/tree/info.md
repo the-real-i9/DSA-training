@@ -57,7 +57,19 @@ A heap is a complete binary tree.
 - Merging two heaps into a single heap
 - General Tree operations, while maintaining the Heap Property.
 
-## Trie
+## Trie (Prefix Tree)
+A tree-like data structure used for efficiently <u>storing and retrieving a dynamic set or associative array</u> where the *keys are usually strings*. The term "Trie" comes from the word "retrieval".
+
+> Key Characteristics
+- **Tree Structure:** A tree structure where each node represents <u>a character in a key</u> or <u>part of a key</u>.
+- **Node:** Each node contains a character and may have links to its children nodes. The links represent the next possible characters in the key.
+- **Root Node:** The topmost node, representing an empty string or the common prefix of all keys.
+- **Leaf Nodes:** They represent the end of a key.
+- **Path to a Node:** The path from the root to a node represents a key.
+- **Prefix Property:** <u>Tries excel at handling prefixes,</u> making them <u>suitable for tasks like **autocomplete** with partial keys</u>.
+
+> Operations on Tries:
+- **Insertion:** 
 
 ## B-Tree
 

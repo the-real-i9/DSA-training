@@ -1,4 +1,4 @@
-package linkedlistuc
+package lluc
 
 import "fmt"
 
