@@ -42,6 +42,43 @@ func (list *LinkedList) Append(value any) {
 	list.length++
 }
 
+func (list *LinkedList) Pop() any {
+	if list.Head == nil {
+		return nil
+	}
+
+	currLastNode := list.Tail.Prev.Next
+
+	secondLastNode := list.Tail.Prev
+
+	// detach the last node from the second last
+	// making it the new last node
+	secondLastNode.Next = nil
+
+	// set the tail to this new last node
+	list.Tail = secondLastNode
+
+	return currLastNode.Val
+}
+
+func (list *LinkedList) Shift() any {
+	if list.Head == nil {
+		return nil
+	}
+
+	firstNode := list.Head
+
+	// detach the first node from the second
+	// making it the new first node
+	secondNode := list.Head.Next
+	secondNode.Prev = nil
+
+	// update the new head
+	list.Head = secondNode
+
+	return firstNode.Val
+}
+
 func (list *LinkedList) Insert(at int, value any) {
 	if list.Head == nil || at >= list.length {
 		panic("Index out of bounds")
@@ -76,29 +113,11 @@ func (list LinkedList) NodeAt(index int) *Node {
 }
 
 func (list LinkedList) ToSlice() []any {
-	slc := make([]any, 0)
+	// slc := make([]any, 0)
+	slc := []any{}
 	for l := list.Head; l != nil; l = l.Next {
 		slc = append(slc, l.Val)
 	}
 
 	return slc
-}
-
-func Init() {
-	/* dll := LinkedList{}
-
-	// dll.Prepend(5)
-	dll.Prepend(4)
-	dll.Prepend(3)
-	dll.Prepend(2)
-	dll.Append(6)
-	dll.Append(7)
-	// dll.Append(8)
-	dll.Append(9)
-	dll.Prepend(1)
-	dll.Insert(4, 5)
-	dll.Insert(7, 8)
-
-	// fmt.Println(dll.Head.Next.Next.Prev.Prev)
-	fmt.Println(dll.ToSlice()) */
 }
