@@ -1,13 +1,13 @@
-# Data structures Use Cases
-You might find it hard to create a simulation until you've actually used or worked with them yourself. i.e. being very familiar with how they actually operate.
+# Data structures and their use cases
+Implementing a simulation may seem difficult if you don't have experience working with a real-world use case you're trying to simulate.
 
-Tick anyone you've successfully simulated or used applied for real.
+Tick anyone you've successfully simulated or you've had experience working with.
 
 ## Linked List
-Suitable for scenarios where the size of the data is not fixed, and efficient insertion or deletion is a priority.
+Suitable for scenarios where the size of the data is not fixed, and efficient insertion or deletion is priority.
 - Dynamic Memory Allocation
 - Music and Video Playlists
-- Undo Functionality in Software
+- Undo Functionality in Software (Stack)
 - Symbol Table in Compilers
 - Task Scheduling in Operating Systems
 - Managing File Systsems

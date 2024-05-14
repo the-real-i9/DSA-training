@@ -1,12 +1,13 @@
 package main
 
 import (
-	doublyLinkedList "dsa/dataStructures/linkedList/doubly"
-	lluc "dsa/useCases/linkedLists"
+	stacksuc "dsa/useCases/stacks"
 )
 
 func main() {
-	// singlylinkedlist.Init()
-	doublyLinkedList.Init()
-	lluc.BrowserHistoryUC()
+	// lluc.UseSinglyLinkedList()
+	// lluc.UseDoublyLinkedList()
+	// lluc.UseBrowserHistory()
+
+	stacksuc.UseStack()
 }
