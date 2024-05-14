@@ -19,7 +19,7 @@ A binary tree in which <u>the left child of a node contains values less than tha
 - Successor and Predecessor
 
 ## Balanced Tree
-- [As defined above].
+[As defined above].
 - The goal of maintaining balance is to ensure that the tree remains relatively shallow, which helps in achieving efficient search, insertion, and deletion operations.
 - <u>The balance property helps prevent the tree from degenerating into a linked list</u>, which could happen in an unbalanced tree.
 - The **balance factor** of a node in a balanced tree is defined as `balanceFactor = height(leftSubtree) - height(rightSubtree)`. A balanced tree has a balance factor of `-1`, `0` or `1` for every node.
@@ -27,15 +27,14 @@ A binary tree in which <u>the left child of a node contains values less than tha
 
 > Types 
 - **AVL Tree:** A <u>self-balancing</u> BST. If a modification operation disrupts the balance, AVL tree uses rotations to restore balance.
-- **Red-Black Tree:** A <u>self-balancing</u> BST. Each node in a Red-Black tree is assigned a color, and certain properties are maintained to ensure balance. The tree is restructured during modifications to maintain balance.
+  > AVL Tree Operations:
+  - Left Rotation
+  - Right Rotation
+  - Left-Right Rotation
+  - Right-Left Rotation
+- **Red-Black Tree:** A <u>self-balancing</u> BST. Each node in a Red-Black tree is assigned a color, and certain properties are maintained to ensure balance. The tree is restructured during modification to maintain balance while adhering to coloring rules.
 
-> AVL Tree Operations:
-- Left Rotation
-- Right Rotation
-- Left-Right Rotation
-- Right-Left Rotation
-
-Balanced trees are crucial in scenarios where search, insertion, and deletion operations need to be performed efficiently, and maintaining a balanced structure is essential for consistent performance.
+Balanced trees are <u>crucial in scenarios where **search**, **insertion**, and **deletion** operations need to be performed efficiently, and maintaining a balanced structure is essential for consistent performance</u>.
 
 ## Heap
 A specialized tree-based data structure that satisfies **the heap property**. Heaps are <u>commonly used to implement **priority queues**</u> and efficiently find the maximum or minimum element in a collection.
@@ -47,14 +46,14 @@ A heap is a complete binary tree.
 - In a **min-heap**, the value of each node is less than or equal to the values of its children.
 
 > Types
-- **Binary Heap:** A binary tree with the heap property.
+- **Binary Heap:** A binary tree with the heap property. It is commonly represented using an array.
 - **Binomial Heap:** A collection of binomial trees where each tree follows the heap property.
-- Fibonacci Heap
+- **Fibonacci Heap:** Used particularly in graph algorithms, such as Dijkstra's algorithm.
 
 > Operations
 - **Heapify:** Converting an array into a heap
 - **Heap sort:** Using a heap to sort an array efficiently
-- Merging two heaps into a single heap
+- Merging two heaps
 - General Tree operations, while maintaining the Heap Property.
 
 ## Trie (Prefix Tree)
@@ -75,7 +74,7 @@ A tree-like data structure used for efficiently <u>storing and retrieving a dyna
 
 ---
 
-## Operations
+# General Operations
 - Enumerating all the items (Traversal)
 - Enumerating a section of a tree
 - Searching for an item (Search)
