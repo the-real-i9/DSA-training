@@ -58,6 +58,8 @@ func (list *LinkedList) Pop() any {
 	// set the tail to this new last node
 	list.Tail = secondLastNode
 
+	list.length--
+
 	return currLastNode.Val
 }
 
@@ -75,6 +77,8 @@ func (list *LinkedList) Shift() any {
 
 	// update the new head
 	list.Head = secondNode
+
+	list.length--
 
 	return firstNode.Val
 }
@@ -100,6 +104,10 @@ func (list *LinkedList) Insert(at int, value any) {
 	nodeAt.Prev = newNode
 
 	list.length++
+}
+
+func (list LinkedList) Length() int {
+	return list.length
 }
 
 func (list LinkedList) NodeAt(index int) *Node {

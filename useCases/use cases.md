@@ -30,16 +30,20 @@ When you need to manage data in a Last-in-First-Out (LIFO) manner.
 
 ## Queue
 Suitable for scenarios where elements need to be processed in a sequential order or FIFO manner
-- Breadth-First Search (Traversal)
-- Task Scheduling
-- Print Queue (Printer Spooler)
-- Order Processing
-- Buffering in Networking
-- Call Center Systems
-- Web Server Request Handling 
-- Background Task Processing
-- Message Queues in Distributed Systems
-- Synchronization in Multithreading ✅
+- Breadth-first search (Traversal)
+- Task scheduling
+- Print queue (Printer Spooler)
+- Order processing
+- Buffering in networking
+- Call center systems
+- Web server request handling 
+- Background task processing
+- Message queues in distributed systems
+- Synchronization in multithreading ✅
+---
+- Bank customer service
+- Order fufillment in warehouses
+- Event handling in GUI applications.
 
 ## Hash Table (Maps)
 Suitable for scenarios where efficient key-based retrieval of data is a significant concern.
