@@ -8,53 +8,97 @@ import (
 type BSTree struct {
 	Root   *BTNode
 	length int
-	cmp    func(incValue, nodeValue any) int
+	cmp    func(x, y any) int
 }
 
-func (bst *BSTree) SetCmpFunc(cmpFunc func(incValue, nodeValue any) int) {
+func (bst *BSTree) SetCmpFunc(cmpFunc func(x, y any) int) {
 	bst.cmp = cmpFunc
 }
 
+// the rule of "insert" states: "assign a node if it's empty, else branchInsert"
 func (bst *BSTree) Insert(v any) {
 	newNode := &BTNode{Data: v}
+
 	if bst.Root == nil {
 		bst.Root = newNode
 	} else {
-		bst.branchInsert(bst.Root, v)
+		bst.branchInsert(bst.Root, newNode)
 	}
 
 	bst.length++
 }
 
-func (bst BSTree) branchInsert(dest *BTNode, v any) {
-	newNode := &BTNode{Data: v}
+// "branchInsert" states:
+// if incoming data is less than that of the parent node, insert to its left child,
+// else if incoming data is greater than that of the parent node, insert to its right child
+// esle, do nothing, as the data already exists in the tree
+func (bst BSTree) branchInsert(dest *BTNode, newNode *BTNode) {
 
-	if bst.cmp(v, dest.Data) < 0 {
+	if bst.cmp(newNode.Data, dest.Data) < 0 {
 		if dest.Left == nil {
 			dest.Left = newNode
 		} else {
-			bst.branchInsert(dest.Left, v)
+			bst.branchInsert(dest.Left, newNode)
 		}
-	} else if bst.cmp(v, dest.Data) > 0 {
+	} else if bst.cmp(newNode.Data, dest.Data) > 0 {
 		if dest.Right == nil {
 			dest.Right = newNode
 		} else {
-			bst.branchInsert(dest.Right, v)
+			bst.branchInsert(dest.Right, newNode)
 		}
 	}
 }
 
-func (bst *BSTree) Length() any {
+func (bst BSTree) Find(target any) (data any, found bool, totalSteps int) {
+	if bst.Root == nil {
+		return nil, false, 0
+	}
+
+	if bst.cmp(target, bst.Root.Data) == 0 {
+		return bst.Root.Data, true, 0
+	}
+
+	return bst.branchFind(bst.Root, target, 1)
+}
+
+func (bst BSTree) branchFind(node *BTNode, target any, steps int) (data any, found bool, totalSteps int) {
+
+	if bst.cmp(target, node.Data) < 0 {
+		if node.Left == nil {
+			return nil, false, steps
+		}
+
+		if bst.cmp(target, node.Left.Data) == 0 {
+			return node.Left.Data, true, steps
+		}
+
+		return bst.branchFind(node.Left, target, steps+1)
+	} else if bst.cmp(target, node.Data) > 0 {
+		if node.Right == nil {
+			return nil, false, steps
+		}
+
+		if bst.cmp(target, node.Right.Data) == 0 {
+			return node.Right.Data, true, steps
+		}
+
+		return bst.branchFind(node.Right, target, steps+1)
+	}
+
+	return nil, false, steps
+}
+
+func (bst BSTree) Length() any {
 	return bst.length
 }
 
 func BSTreeInit() {
 	userTree := BSTree{}
 
-	userTree.SetCmpFunc(func(incValue, nodeValue any) int {
-		if incValue.(User).Id < nodeValue.(User).Id {
+	userTree.SetCmpFunc(func(x, y any) int {
+		if x.(User).Id < y.(User).Id {
 			return -1
-		} else if incValue.(User).Id > nodeValue.(User).Id {
+		} else if x.(User).Id > y.(User).Id {
 			return 1
 		}
 
@@ -70,9 +114,26 @@ func BSTreeInit() {
 	userTree.Insert(User{Id: 8106525254, Username: "jkl", Name: "Stu Vwx"})
 	userTree.Insert(User{Id: 8065329258, Username: "mno", Name: "Yza Bcd"})
 	userTree.Insert(User{Id: 7052206389, Username: "pqr", Name: "Efg Hij"})
+	userTree.Insert(User{Id: 7052206390, Username: "stu", Name: "Klm Nop"})
 
-	res, _ := json.MarshalIndent(userTree, "", "  ")
+	/* res, _ := json.MarshalIndent(userTree, "", "  ")
 
 	fmt.Println(string(res))
-	fmt.Println(userTree.Length())
+	fmt.Println(userTree.Length()) */
+
+	resUser, found, totalSteps := userTree.Find(User{Id: 7052206389})
+	if !found {
+		fmt.Println("tree.Find: not found")
+		return
+	}
+
+	data := struct {
+		User  any
+		Steps int
+	}{User: resUser, Steps: totalSteps}
+
+	jsres, _ := json.MarshalIndent(data, "", "  ")
+
+	fmt.Println(string(jsres))
+
 }
