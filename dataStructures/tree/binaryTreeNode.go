@@ -1,9 +1,9 @@
 package tree
 
 type User struct {
-	Id       int
-	Username string
-	Name     string
+	Id       int    `json:"id"`
+	Username string `json:"username"`
+	Name     string `json:"name"`
 }
 
 type BTNode struct {

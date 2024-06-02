@@ -49,7 +49,11 @@ func (bst BSTree) branchInsert(dest *BTNode, newNode *BTNode) {
 	}
 }
 
-func (bst BSTree) Find(target any) (data any, found bool, totalSteps int) {
+func (bst *BSTree) Delete(value any) {
+
+}
+
+func (bst BSTree) Search(target any) (data any, found bool, totalSteps int) {
 	if bst.Root == nil {
 		return nil, false, 0
 	}
@@ -58,10 +62,10 @@ func (bst BSTree) Find(target any) (data any, found bool, totalSteps int) {
 		return bst.Root.Data, true, 0
 	}
 
-	return bst.branchFind(bst.Root, target, 1)
+	return bst.branchSearch(bst.Root, target, 1)
 }
 
-func (bst BSTree) branchFind(node *BTNode, target any, steps int) (data any, found bool, totalSteps int) {
+func (bst BSTree) branchSearch(node *BTNode, target any, steps int) (data any, found bool, totalSteps int) {
 
 	if bst.cmp(target, node.Data) < 0 {
 		if node.Left == nil {
@@ -72,7 +76,7 @@ func (bst BSTree) branchFind(node *BTNode, target any, steps int) (data any, fou
 			return node.Left.Data, true, steps
 		}
 
-		return bst.branchFind(node.Left, target, steps+1)
+		return bst.branchSearch(node.Left, target, steps+1)
 	} else if bst.cmp(target, node.Data) > 0 {
 		if node.Right == nil {
 			return nil, false, steps
@@ -82,10 +86,77 @@ func (bst BSTree) branchFind(node *BTNode, target any, steps int) (data any, fou
 			return node.Right.Data, true, steps
 		}
 
-		return bst.branchFind(node.Right, target, steps+1)
+		return bst.branchSearch(node.Right, target, steps+1)
 	}
 
 	return nil, false, steps
+}
+
+func (bst BSTree) Traverse(out chan<- any) {
+	if bst.Root == nil {
+		return
+	}
+
+	out <- bst.Root.Data
+
+	bst.branchTraverse(bst.Root, out)
+
+	close(out)
+}
+
+func (bst BSTree) branchTraverse(node *BTNode, out chan<- any) {
+
+	if node.Left != nil {
+		out <- node.Left.Data
+		bst.branchTraverse(node.Left, out)
+	}
+
+	if node.Right != nil {
+		out <- node.Right.Data
+		bst.branchTraverse(node.Right, out)
+	}
+}
+
+func (bst BSTree) Min() any {
+	recv := make(chan any)
+	var min any
+
+	go func() {
+		bst.Traverse(recv)
+	}()
+
+	for potMin := range recv {
+		if min != nil {
+			if bst.cmp(potMin, min) < 0 {
+				min = potMin
+			}
+		} else {
+			min = potMin
+		}
+	}
+
+	return min
+}
+
+func (bst BSTree) Max() any {
+	recv := make(chan any)
+	var max any
+
+	go func() {
+		bst.Traverse(recv)
+	}()
+
+	for potMax := range recv {
+		if max != nil {
+			if bst.cmp(potMax, max) > 0 {
+				max = potMax
+			}
+		} else {
+			max = potMax
+		}
+	}
+
+	return max
 }
 
 func (bst BSTree) Length() any {
@@ -105,6 +176,7 @@ func BSTreeInit() {
 		return 0
 	})
 
+	// Insert
 	userTree.Insert(User{Id: 8035700462, Username: "i9x", Name: "Kehinde Ogunrinola"})
 	userTree.Insert(User{Id: 8056679557, Username: "dollyp", Name: "Dolapo Olaleye"})
 	userTree.Insert(User{Id: 8052364849, Username: "menu", Name: "Menu Menu"})
@@ -121,9 +193,10 @@ func BSTreeInit() {
 	fmt.Println(string(res))
 	fmt.Println(userTree.Length()) */
 
-	resUser, found, totalSteps := userTree.Find(User{Id: 7052206389})
+	// Search
+	/* resUser, found, totalSteps := userTree.Search(User{Id: 7052206389})
 	if !found {
-		fmt.Println("tree.Find: not found")
+		fmt.Println("tree.Search: not found")
 		return
 	}
 
@@ -134,6 +207,30 @@ func BSTreeInit() {
 
 	jsres, _ := json.MarshalIndent(data, "", "  ")
 
-	fmt.Println(string(jsres))
+	fmt.Println(string(jsres)) */
 
+	// Traverse
+	/* userChan := make(chan any)
+
+	go func() {
+		userTree.Traverse(userChan)
+	}()
+
+	for user := range userChan {
+
+		fmt.Println(user.(User))
+		time.Sleep(1 * time.Second)
+	} */
+
+	minUser := userTree.Min()
+	maxUser := userTree.Max()
+
+	data := struct {
+		MinUser any `json:"minUser"`
+		MaxUser any `json:"maxUser"`
+	}{MinUser: minUser, MaxUser: maxUser}
+
+	jsres, _ := json.MarshalIndent(data, "", "  ")
+
+	fmt.Println(string(jsres))
 }
