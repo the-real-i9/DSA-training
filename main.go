@@ -1,6 +1,6 @@
 package main
 
-import queueuc "dsa/useCases/queues"
+import "dsa/dataStructures/tree"
 
 func main() {
 	// lluc.UseSinglyLinkedList()
@@ -9,5 +9,7 @@ func main() {
 
 	// stacksuc.UseStack()
 
-	queueuc.UseQueue()
+	// queueuc.UseQueue()
+
+	tree.BSTreeInit()
 }
