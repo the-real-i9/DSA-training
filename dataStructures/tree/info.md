@@ -14,6 +14,8 @@ Observe that the type of a binary tree is based on the nature of the real-world 
 
 A binary tree in which <u>the left child of a node contains values less than that of the node</u>, while <u>the right child contains values greater than that of the node</u>.
 
+
+
 ### Additional Operations
 
 - Finding the Mininum and Maximum value nodes

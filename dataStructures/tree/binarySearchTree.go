@@ -77,19 +77,18 @@ func (bst BSTree) branchSearch(node *BTNode, target any, steps int) (data any, f
 		}
 
 		return bst.branchSearch(node.Left, target, steps+1)
-	} else if bst.cmp(target, node.Data) > 0 {
-		if node.Right == nil {
-			return nil, false, steps
-		}
-
-		if bst.cmp(target, node.Right.Data) == 0 {
-			return node.Right.Data, true, steps
-		}
-
-		return bst.branchSearch(node.Right, target, steps+1)
 	}
 
-	return nil, false, steps
+	if node.Right == nil {
+		return nil, false, steps
+	}
+
+	if bst.cmp(target, node.Right.Data) == 0 {
+		return node.Right.Data, true, steps
+	}
+
+	return bst.branchSearch(node.Right, target, steps+1)
+
 }
 
 func (bst BSTree) Traverse(out chan<- any) {
@@ -125,13 +124,13 @@ func (bst BSTree) Min() any {
 		bst.Traverse(recv)
 	}()
 
-	for potMin := range recv {
+	for val := range recv {
 		if min != nil {
-			if bst.cmp(potMin, min) < 0 {
-				min = potMin
+			if bst.cmp(val, min) < 0 {
+				min = val
 			}
 		} else {
-			min = potMin
+			min = val
 		}
 	}
 
@@ -146,13 +145,13 @@ func (bst BSTree) Max() any {
 		bst.Traverse(recv)
 	}()
 
-	for potMax := range recv {
+	for val := range recv {
 		if max != nil {
-			if bst.cmp(potMax, max) > 0 {
-				max = potMax
+			if bst.cmp(val, max) > 0 {
+				max = val
 			}
 		} else {
-			max = potMax
+			max = val
 		}
 	}
 
