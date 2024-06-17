@@ -1,5 +1,7 @@
 package comparator
 
+import "cmp"
+
 type Comparator struct {
 	Compare func(a, b any) int
 }
@@ -30,4 +32,8 @@ func (c *Comparator) Reverse() {
 	c.Compare = func(a, b any) int {
 		return compareOriginal(b, a)
 	}
+}
+
+func DefaultCompareFunc(a, b any) int {
+	return cmp.Compare(a.(int), b.(int))
 }

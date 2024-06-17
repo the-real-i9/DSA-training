@@ -14,7 +14,7 @@ func TestBTNode(t *testing.T) {
 	node3.SetValue(15)
 
 	node.SetLeft(node2)
-	node.SetLeft(node3)
+	node2.SetLeft(node3)
 
-	t.Logf("%+v\n", node3)
+	t.Logf("%+v\n", node.RightHeight())
 }

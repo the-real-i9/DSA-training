@@ -21,32 +21,32 @@ type BinaryTreeNode struct {
 	NodeComparator comparator.Comparator
 }
 
-func (b BinaryTreeNode) LeftHeight() int {
+func (b *BinaryTreeNode) LeftHeight() int {
 	if b.Left == nil {
 		return 0
 	}
 
-	return b.Left.Height() + 1
+	return b.Left.Height()
 }
 
-func (b BinaryTreeNode) RightHeight() int {
-	if b.Left == nil {
+func (b *BinaryTreeNode) RightHeight() int {
+	if b.Right == nil {
 		return 0
 	}
 
-	return b.Right.Height() + 1
+	return b.Right.Height()
 }
 
-func (b BinaryTreeNode) Height() int {
-	return max(b.LeftHeight(), b.RightHeight())
+func (b *BinaryTreeNode) Height() int {
+	return max(b.LeftHeight(), b.RightHeight()) + 1
 }
 
-func (b BinaryTreeNode) BalanceFactor() int {
+func (b *BinaryTreeNode) BalanceFactor() int {
 	return b.LeftHeight() - b.RightHeight()
 }
 
 // A node's parent's sibling
-func (b BinaryTreeNode) Uncle() *BinaryTreeNode {
+func (b *BinaryTreeNode) Uncle() *BinaryTreeNode {
 	// Check if the current node has parent
 	if b.Parent == nil {
 		return nil
@@ -111,7 +111,7 @@ func (b *BinaryTreeNode) SetRight(node *BinaryTreeNode) {
 	}
 }
 
-func (b *BinaryTreeNode) RemoveChild(nodeToRemove BinaryTreeNode) bool {
+func (b *BinaryTreeNode) RemoveChild(nodeToRemove *BinaryTreeNode) bool {
 	if b.Left != nil && b.NodeComparator.Equal(b.Left, nodeToRemove) {
 		b.Left = nil
 		return true
@@ -123,4 +123,28 @@ func (b *BinaryTreeNode) RemoveChild(nodeToRemove BinaryTreeNode) bool {
 	}
 
 	return false
+}
+
+func (b *BinaryTreeNode) ReplaceChild(nodeToReplace *BinaryTreeNode, replacementNode *BinaryTreeNode) bool {
+	if nodeToReplace == nil || replacementNode == nil {
+		return false
+	}
+
+	if b.Left != nil && b.NodeComparator.Equal(b.Left, nodeToReplace) {
+		b.Left = replacementNode
+		return true
+	}
+
+	if b.Right != nil && b.NodeComparator.Equal(b.Right, nodeToReplace) {
+		b.Right = replacementNode
+		return true
+	}
+
+	return false
+}
+
+func CopyNode(targetNode *BinaryTreeNode, sourceNode BinaryTreeNode) {
+	targetNode.SetValue(sourceNode.Value)
+	targetNode.SetLeft(targetNode.Left)
+	targetNode.SetRight(targetNode.Right)
 }
