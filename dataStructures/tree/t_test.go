@@ -9,12 +9,12 @@ func TestBTNode(t *testing.T) {
 	node2 := &BinaryTreeNode{}
 	node3 := &BinaryTreeNode{}
 
-	node.SetValue(5)
-	node2.SetValue(10)
+	node.SetValue(10)
+	node2.SetValue(5)
 	node3.SetValue(15)
 
 	node.SetLeft(node2)
-	node2.SetLeft(node3)
+	node.SetRight(node3)
 
-	t.Logf("%+v\n", node.RightHeight())
+	t.Logf("%+v\n", node.String())
 }

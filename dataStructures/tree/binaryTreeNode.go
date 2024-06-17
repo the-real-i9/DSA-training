@@ -1,6 +1,9 @@
 package tree
 
-import "dsa/utils/comparator"
+import (
+	"dsa/utils/comparator"
+	"fmt"
+)
 
 type User struct {
 	Id       int    `json:"id"`
@@ -21,7 +24,7 @@ type BinaryTreeNode struct {
 	NodeComparator comparator.Comparator
 }
 
-func (b *BinaryTreeNode) LeftHeight() int {
+func (b BinaryTreeNode) LeftHeight() int {
 	if b.Left == nil {
 		return 0
 	}
@@ -29,7 +32,7 @@ func (b *BinaryTreeNode) LeftHeight() int {
 	return b.Left.Height()
 }
 
-func (b *BinaryTreeNode) RightHeight() int {
+func (b BinaryTreeNode) RightHeight() int {
 	if b.Right == nil {
 		return 0
 	}
@@ -37,16 +40,16 @@ func (b *BinaryTreeNode) RightHeight() int {
 	return b.Right.Height()
 }
 
-func (b *BinaryTreeNode) Height() int {
+func (b BinaryTreeNode) Height() int {
 	return max(b.LeftHeight(), b.RightHeight()) + 1
 }
 
-func (b *BinaryTreeNode) BalanceFactor() int {
+func (b BinaryTreeNode) BalanceFactor() int {
 	return b.LeftHeight() - b.RightHeight()
 }
 
 // A node's parent's sibling
-func (b *BinaryTreeNode) Uncle() *BinaryTreeNode {
+func (b BinaryTreeNode) Uncle() *BinaryTreeNode {
 	// Check if the current node has parent
 	if b.Parent == nil {
 		return nil
@@ -147,4 +150,29 @@ func CopyNode(targetNode *BinaryTreeNode, sourceNode BinaryTreeNode) {
 	targetNode.SetValue(sourceNode.Value)
 	targetNode.SetLeft(targetNode.Left)
 	targetNode.SetRight(targetNode.Right)
+}
+
+// In-Order traversal starts from left child, to parent or root, and, finally, to right child
+// It traverses the tree, presumably, as a Balanced Tree
+func (b BinaryTreeNode) TraverseInOrder() []any {
+	res := []any{}
+
+	// Add left node
+	if b.Left != nil {
+		res = append(res, b.Left.TraverseInOrder()...)
+	}
+
+	// Add parent or root
+	res = append(res, b.Value)
+
+	// Add right
+	if b.Right != nil {
+		res = append(res, b.Right.TraverseInOrder()...)
+	}
+
+	return res
+}
+
+func (b BinaryTreeNode) String() string {
+	return fmt.Sprint(b.TraverseInOrder())
 }
