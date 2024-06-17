@@ -1,7 +1,5 @@
 package main
 
-import "dsa/dataStructures/tree"
-
 func main() {
 	// lluc.UseSinglyLinkedList()
 	// lluc.UseDoublyLinkedList()
@@ -11,5 +9,4 @@ func main() {
 
 	// queueuc.UseQueue()
 
-	tree.BSTreeInit()
 }
