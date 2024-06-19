@@ -1,4 +1,4 @@
-package tree
+package binarySearchTree
 
 type BinarySearchTree struct {
 }
