@@ -1,6 +1,6 @@
 package stack
 
-import doublyLinkedList "dsa/dataStructures/linkedList/doubly"
+import "dsa/dataStructures/linkedList/doublyLinkedList"
 
 type Stack struct {
 	data doublyLinkedList.LinkedList

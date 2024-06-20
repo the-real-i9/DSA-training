@@ -1,4 +1,4 @@
-package stacksuc
+package stackUseCases
 
 import (
 	"dsa/dataStructures/stack"

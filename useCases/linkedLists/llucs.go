@@ -1,21 +1,22 @@
 package lluc
 
 import (
-	doublyLinkedList "dsa/dataStructures/linkedList/doubly"
-	singlyLinkedList "dsa/dataStructures/linkedList/singly"
+	"dsa/dataStructures/linkedList/doublyLinkedList"
+	"dsa/dataStructures/linkedList/singlyLinkedList"
+	"dsa/useCases/linkedLists/webBrowser"
 	"fmt"
 )
 
 func UseBrowserHistory() {
-	bh := browserHistory{}
+	bh := &webBrowser.History{}
 
-	bh.Push(webPage{Title: "Testing", Body: "Testing this browser history"})
-	bh.Push(webPage{Title: "Testing 22", Body: "Testing another browser history"})
+	bh.Push(webBrowser.WebPage{Title: "Testing", Body: "Testing this browser history"})
+	bh.Push(webBrowser.WebPage{Title: "Testing 22", Body: "Testing another browser history"})
 
 	bh.Back()
 	bh.Forward()
 
-	fmt.Printf("%+v\n", bh.Current.Page)
+	fmt.Printf("%+v\n", bh.Current.Main)
 }
 
 func UseDoublyLinkedList() {

@@ -1,6 +1,6 @@
 package queue
 
-import doublyLinkedList "dsa/dataStructures/linkedList/doubly"
+import "dsa/dataStructures/linkedList/doublyLinkedList"
 
 type Queue struct {
 	data doublyLinkedList.LinkedList

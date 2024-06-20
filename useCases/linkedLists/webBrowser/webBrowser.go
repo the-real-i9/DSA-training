@@ -1,40 +1,40 @@
-package lluc
+package webBrowser
 
-type webPage struct {
+type WebPage struct {
 	Title string
 	Body  string
 }
 
 type browserPage struct {
 	prev *browserPage
-	Page webPage
+	Main WebPage
 	next *browserPage
 }
 
-type browserHistory struct {
+type History struct {
 	head    *browserPage
 	tail    *browserPage
 	Current *browserPage
 	length  int
 }
 
-func (bh *browserHistory) Push(page webPage) {
-	newPage := &browserPage{Page: page}
+func (bh *History) Push(page WebPage) {
+	newBrowserPage := &browserPage{Main: page}
 
 	if bh.head == nil {
-		bh.head = newPage
+		bh.head = newBrowserPage
 	} else {
-		bh.tail.next = newPage
-		newPage.prev = bh.tail
+		bh.tail.next = newBrowserPage
+		newBrowserPage.prev = bh.tail
 	}
 
-	bh.tail = newPage
+	bh.tail = newBrowserPage
 
-	bh.Current = newPage
+	bh.Current = newBrowserPage
 	bh.length++
 }
 
-func (bh *browserHistory) Pop() {
+func (bh *History) Pop() {
 	if bh.length < 1 {
 		return
 	}
@@ -57,21 +57,21 @@ func (bh *browserHistory) Pop() {
 	bh.length--
 }
 
-func (bh *browserHistory) Forward() {
+func (bh *History) Forward() {
 	cp := bh.Current
 	if cp.next != nil {
 		bh.Current = cp.next
 	}
 }
 
-func (bh *browserHistory) Back() {
+func (bh *History) Back() {
 	cp := bh.Current
 	if cp.prev != nil {
 		bh.Current = cp.prev
 	}
 }
 
-func (bh *browserHistory) Go(step int) {
+func (bh *History) Go(step int) {
 	targetPage := bh.Current
 
 	if step < 0 {

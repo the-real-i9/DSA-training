@@ -1,4 +1,4 @@
-package queueuc
+package queueUseCases
 
 import (
 	"dsa/dataStructures/queue"
