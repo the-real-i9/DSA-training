@@ -36,7 +36,7 @@ func TestBinarySearchTree(t *testing.T) {
 	bstree.Insert(User{Id: 7052206389, Username: "pqr", Name: "Efg Hij"})
 	bstree.Insert(User{Id: 7052206390, Username: "stu", Name: "Klm Nop"})
 
-	bstree.Remove(User{Id: 8035700462})
+	bstree.Remove(User{Id: 8065329258})
 
 	// t.Logf("%+v\n", bstree.Contains(User{Id: 8035700462}))
 	t.Log(bstree.PrintTree())

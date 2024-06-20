@@ -1,5 +1,9 @@
 package binarySearchTree
 
+import (
+	"fmt"
+)
+
 func (b BinarySearchTreeNode) LeftHeight() int {
 	if b.Left == nil {
 		return 0
@@ -125,10 +129,10 @@ func (b *BinarySearchTreeNode) ReplaceChild(nodeToReplace *BinarySearchTreeNode,
 	return false
 }
 
-func CopyNode(targetNode *BinarySearchTreeNode, sourceNode *BinarySearchTreeNode) {
-	targetNode.SetValue(sourceNode.Value)
-	targetNode.SetLeft(targetNode.Left)
-	targetNode.SetRight(targetNode.Right)
+func CopyNode(destNode *BinarySearchTreeNode, srcNode *BinarySearchTreeNode) {
+	destNode.SetValue(srcNode.Value)
+	destNode.SetLeft(destNode.Left)
+	destNode.SetRight(destNode.Right)
 }
 
 // In-Order traversal starts from Left child, to parent or root, and, finally, to Right child
@@ -150,4 +154,8 @@ func (b BinarySearchTreeNode) TraverseInOrder() []any {
 	}
 
 	return res
+}
+
+func (b BinarySearchTreeNode) ToString() string {
+	return fmt.Sprint(b.TraverseInOrder()...)
 }

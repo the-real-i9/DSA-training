@@ -120,6 +120,8 @@ func (b *BinarySearchTreeNode) Remove(value any) bool {
 			b.Remove(nextBiggerNode.Value)
 			nodeToRemove.SetValue(nextBiggerNode.Value)
 		} else {
+			// In case if next right value is the next bigger one and it doesn't have left child
+			// then just replace the node that is going to be deleted with the right node
 			nodeToRemove.SetValue(nodeToRemove.Right.Value)
 			nodeToRemove.SetRight(nodeToRemove.Right.Right)
 		}
@@ -134,7 +136,7 @@ func (b *BinarySearchTreeNode) Remove(value any) bool {
 		if parent != nil {
 			parent.ReplaceChild(nodeToRemove, childNode)
 		} else {
-			CopyNode(childNode, nodeToRemove)
+			CopyNode(nodeToRemove, childNode)
 		}
 	}
 

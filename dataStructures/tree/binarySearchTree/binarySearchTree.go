@@ -32,6 +32,10 @@ func (b *BinarySearchTree) Remove(value any) bool {
 	return b.Root.Remove(value)
 }
 
+func (b BinarySearchTree) ToString() string {
+	return b.Root.ToString()
+}
+
 func (b *BinarySearchTree) PrintTree() string {
 	t, err := json.MarshalIndent(b, "", "--")
 
