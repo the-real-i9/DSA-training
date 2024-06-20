@@ -1,7 +1,7 @@
 package binarySearchTree
 
 import (
-	"fmt"
+	"encoding/json"
 )
 
 /* type User struct {
@@ -34,33 +34,33 @@ func (b BinarySearchTreeNode) BalanceFactor() int {
 	return b.LeftHeight() - b.RightHeight()
 }
 
-// A node's Parent's sibling
+// A node's parent's sibling
 func (b BinarySearchTreeNode) Uncle() *BinarySearchTreeNode {
-	// Check if the current node has Parent
-	if b.Parent == nil {
+	// Check if the current node has parent
+	if b.parent == nil {
 		return nil
 	}
 
-	// Check if current node has grand-Parent
-	if b.Parent.Parent == nil {
+	// Check if current node has grand-parent
+	if b.parent.parent == nil {
 		return nil
 	}
 
-	// check if grand-Parent has two children
-	if b.Parent.Parent.Left == nil || b.Parent.Parent.Right == nil {
+	// check if grand-parent has two children
+	if b.parent.parent.Left == nil || b.parent.parent.Right == nil {
 		return nil
 	}
 
-	// Now that we know that the current node has grand-Parent and this grand-Parent has two childeren
+	// Now that we know that the current node has grand-parent and this grand-parent has two childeren
 
-	// if this node's Parent is the grand-Parent's Left child,
-	if b.NodeValueComparator.Equal(b.Parent, b.Parent.Parent.Left) {
+	// if this node's parent is the grand-parent's Left child,
+	if b.nodeValueComparator.Equal(b.parent, b.parent.parent.Left) {
 		//  then the uncle is its Right child,
-		return b.Parent.Parent.Right
+		return b.parent.parent.Right
 	}
 
 	// else the uncle is its Left child
-	return b.Parent.Parent.Left
+	return b.parent.parent.Left
 }
 
 func (b *BinarySearchTreeNode) SetValue(value any) {
@@ -69,44 +69,44 @@ func (b *BinarySearchTreeNode) SetValue(value any) {
 }
 
 func (b *BinarySearchTreeNode) SetLeft(node *BinarySearchTreeNode) {
-	// if node (Parent) currently has a Left child
+	// if node (parent) currently has a Left child
 	if b.Left != nil {
 
-		// let the Left child know it no longer has a Parent, by
-		// removing the Left child's Parent reference to this node (Parent)
-		b.Left.Parent = nil
+		// let the Left child know it no longer has a parent, by
+		// removing the Left child's parent reference to this node (parent)
+		b.Left.parent = nil
 	}
 
-	// set this node's (Parent's) new Left child
+	// set this node's (parent's) new Left child
 	b.Left = node
 
-	// let the new Left child know it now has a Parent, by
-	// setting the new Left child's Parent reference to this node (Parent)
+	// let the new Left child know it now has a parent, by
+	// setting the new Left child's parent reference to this node (parent)
 	if node != nil {
-		b.Left.Parent = b
+		b.Left.parent = b
 	}
 }
 
 // just like SetLeft, but for the Right child in this case
 func (b *BinarySearchTreeNode) SetRight(node *BinarySearchTreeNode) {
 	if b.Right != nil {
-		b.Right.Parent = nil
+		b.Right.parent = nil
 	}
 
 	b.Right = node
 
 	if node != nil {
-		b.Right.Parent = b
+		b.Right.parent = b
 	}
 }
 
 func (b *BinarySearchTreeNode) RemoveChild(nodeToRemove *BinarySearchTreeNode) bool {
-	if b.Left != nil && b.NodeValueComparator.Equal(b.Left, nodeToRemove) {
+	if b.Left != nil && b.nodeValueComparator.Equal(b.Left, nodeToRemove) {
 		b.Left = nil
 		return true
 	}
 
-	if b.Right != nil && b.NodeValueComparator.Equal(b.Right, nodeToRemove) {
+	if b.Right != nil && b.nodeValueComparator.Equal(b.Right, nodeToRemove) {
 		b.Right = nil
 		return true
 	}
@@ -119,12 +119,12 @@ func (b *BinarySearchTreeNode) ReplaceChild(nodeToReplace *BinarySearchTreeNode,
 		return false
 	}
 
-	if b.Left != nil && b.NodeValueComparator.Equal(b.Left, nodeToReplace) {
+	if b.Left != nil && b.nodeValueComparator.Equal(b.Left, nodeToReplace) {
 		b.Left = replacementNode
 		return true
 	}
 
-	if b.Right != nil && b.NodeValueComparator.Equal(b.Right, nodeToReplace) {
+	if b.Right != nil && b.nodeValueComparator.Equal(b.Right, nodeToReplace) {
 		b.Right = replacementNode
 		return true
 	}
@@ -138,7 +138,7 @@ func CopyNode(targetNode *BinarySearchTreeNode, sourceNode BinarySearchTreeNode)
 	targetNode.SetRight(targetNode.Right)
 }
 
-// In-Order traversal starts from Left child, to Parent or root, and, finally, to Right child
+// In-Order traversal starts from Left child, to parent or root, and, finally, to Right child
 // It traverses the tree, presumably, as a Balanced Tree
 func (b BinarySearchTreeNode) TraverseInOrder() []any {
 	res := []any{}
@@ -148,7 +148,7 @@ func (b BinarySearchTreeNode) TraverseInOrder() []any {
 		res = append(res, b.Left.TraverseInOrder()...)
 	}
 
-	// Add Parent or root
+	// Add parent or root
 	res = append(res, b.Value)
 
 	// Add Right
@@ -159,6 +159,8 @@ func (b BinarySearchTreeNode) TraverseInOrder() []any {
 	return res
 }
 
-func (b BinarySearchTreeNode) ToString() string {
-	return fmt.Sprint(b.TraverseInOrder())
+func (b BinarySearchTreeNode) Tree() string {
+	t, _ := json.MarshalIndent(b, "", "  ")
+
+	return string(t)
 }

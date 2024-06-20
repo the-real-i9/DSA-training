@@ -5,42 +5,42 @@ import (
 )
 
 type BinarySearchTreeNode struct {
+	Value               any
 	Left                *BinarySearchTreeNode
 	Right               *BinarySearchTreeNode
-	Parent              *BinarySearchTreeNode
-	Value               any
-	NodeValueComparator comparator.Comparator
+	parent              *BinarySearchTreeNode
+	nodeValueComparator comparator.Comparator
 }
 
 func (b *BinarySearchTreeNode) Insert(value any) {
-	if b.NodeValueComparator.Equal(b.Value, nil) {
+	if b.nodeValueComparator.Equal(b.Value, nil) {
 		b.Value = value
 		return
 	}
 
-	if b.NodeValueComparator.LessThan(value, b.Value) {
-		// Insert to the left
+	if b.nodeValueComparator.LessThan(value, b.Value) {
+		// Insert to the Left
 
 		if b.Left != nil {
 			b.Left.Insert(value)
 			return
 		}
 
-		newNode := &BinarySearchTreeNode{Value: value, NodeValueComparator: b.NodeValueComparator}
+		newNode := &BinarySearchTreeNode{Value: value, nodeValueComparator: b.nodeValueComparator}
 		b.SetLeft(newNode)
 
 		return
 	}
 
-	if b.NodeValueComparator.GreaterThan(value, b.Value) {
-		// Insert to the right
+	if b.nodeValueComparator.GreaterThan(value, b.Value) {
+		// Insert to the Right
 
 		if b.Right != nil {
 			b.Right.Insert(value)
 			return
 		}
 
-		newNode := &BinarySearchTreeNode{Value: value, NodeValueComparator: b.NodeValueComparator}
+		newNode := &BinarySearchTreeNode{Value: value, nodeValueComparator: b.nodeValueComparator}
 		b.SetRight(newNode)
 
 	}

@@ -6,9 +6,9 @@ import (
 	"testing"
 )
 
-func TestBSTNode(t *testing.T) {
+func TestBinarySearchTree(t *testing.T) {
 
-	node := &binarySearchTree.BinarySearchTreeNode{
+	node := &binarySearchTree.BinarySearchTree{
 		NodeValueComparator: comparator.Comparator{
 			Compare: comparator.DefaultCompareFunc,
 		},
@@ -17,7 +17,6 @@ func TestBSTNode(t *testing.T) {
 	node.Insert(5)
 	node.Insert(6)
 	node.Insert(4)
-	node.Left.Insert(3)
 
-	t.Logf("%+v\n", node)
+	t.Logf("%+v\n", node.Tree())
 }
