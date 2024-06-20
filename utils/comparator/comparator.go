@@ -7,14 +7,26 @@ type Comparator struct {
 }
 
 func (c Comparator) Equal(a, b any) bool {
+	if a == nil || b == nil {
+		return a == b
+	}
+
 	return c.Compare(a, b) == 0
 }
 
 func (c Comparator) LessThan(a, b any) bool {
+	if a == nil || b == nil {
+		return false
+	}
+
 	return c.Compare(a, b) < 0
 }
 
 func (c Comparator) GreaterThan(a, b any) bool {
+	if a == nil || b == nil {
+		return false
+	}
+
 	return c.Compare(a, b) > 0
 }
 

@@ -1,20 +1,23 @@
 package tree
 
 import (
+	"dsa/dataStructures/tree/binarySearchTree"
+	"dsa/utils/comparator"
 	"testing"
 )
 
-func TestBTNode(t *testing.T) {
-	node := &BinaryTreeNode{}
-	node2 := &BinaryTreeNode{}
-	node3 := &BinaryTreeNode{}
+func TestBSTNode(t *testing.T) {
 
-	node.SetValue(10)
-	node2.SetValue(5)
-	node3.SetValue(15)
+	node := &binarySearchTree.BinarySearchTreeNode{
+		NodeValueComparator: comparator.Comparator{
+			Compare: comparator.DefaultCompareFunc,
+		},
+	}
 
-	node.SetLeft(node2)
-	node.SetRight(node3)
+	node.Insert(5)
+	node.Insert(6)
+	node.Insert(4)
+	node.Left.Insert(3)
 
-	t.Logf("%+v\n", node.String())
+	t.Logf("%+v\n", node)
 }
