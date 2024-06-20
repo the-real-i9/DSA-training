@@ -58,34 +58,37 @@ func (b *BinarySearchTreeNode) SetValue(value any) {
 
 }
 
-func (b *BinarySearchTreeNode) SetLeft(node *BinarySearchTreeNode) {
-	// if node (parent) currently has a Left child
+// Step1: If node (parent) currently has a Left child
+//
+// Step2: Let the Left child know it no longer has a parent, by
+// removing the Left child's parent reference to this node (parent)
+//
+// Step3: Set this node's (parent's) new Left child to newNode
+//
+// Step4: Let the new Left child know it now has a parent, by
+// setting the new Left child's parent reference to this node (parent)
+func (b *BinarySearchTreeNode) SetLeft(newNode *BinarySearchTreeNode) {
 	if b.Left != nil {
 
-		// let the Left child know it no longer has a parent, by
-		// removing the Left child's parent reference to this node (parent)
 		b.Left.parent = nil
 	}
 
-	// set this node's (parent's) new Left child
-	b.Left = node
+	b.Left = newNode
 
-	// let the new Left child know it now has a parent, by
-	// setting the new Left child's parent reference to this node (parent)
-	if node != nil {
+	if newNode != nil {
 		b.Left.parent = b
 	}
 }
 
 // just like SetLeft, but for the Right child in this case
-func (b *BinarySearchTreeNode) SetRight(node *BinarySearchTreeNode) {
+func (b *BinarySearchTreeNode) SetRight(newNode *BinarySearchTreeNode) {
 	if b.Right != nil {
 		b.Right.parent = nil
 	}
 
-	b.Right = node
+	b.Right = newNode
 
-	if node != nil {
+	if newNode != nil {
 		b.Right.parent = b
 	}
 }

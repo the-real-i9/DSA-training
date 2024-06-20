@@ -2,12 +2,6 @@ package binaryTreeNode
 
 import "dsa/utils/comparator"
 
-/* type User struct {
-	Id       int    `json:"id"`
-	Username string `json:"username"`
-	Name     string `json:"name"`
-} */
-
 func NewBinaryTreeNode(value any) *BinaryTreeNode {
 	return &BinaryTreeNode{Value: value, nodeComparator: comparator.NewComparator(nil)}
 }

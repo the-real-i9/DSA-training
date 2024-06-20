@@ -20,6 +20,14 @@ func (b *BinarySearchTree) Insert(value any) {
 	b.Root.Insert(value)
 }
 
+func (b *BinarySearchTree) Find(value any) any {
+	return b.Root.Find(value)
+}
+
+func (b *BinarySearchTree) Contains(value any) bool {
+	return b.Root.Contains(value)
+}
+
 func (b *BinarySearchTree) PrintTree() string {
 	t, err := json.MarshalIndent(b, "", "--")
 

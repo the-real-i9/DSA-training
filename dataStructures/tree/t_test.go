@@ -5,6 +5,12 @@ import (
 	"testing"
 )
 
+type User struct {
+	Id       int    `json:"id"`
+	Username string `json:"username"`
+	Name     string `json:"name"`
+}
+
 func TestBinarySearchTree(t *testing.T) {
 
 	bstree := binarySearchTree.NewBinarySearchTree(nil)
@@ -12,6 +18,7 @@ func TestBinarySearchTree(t *testing.T) {
 	bstree.Insert(5)
 	bstree.Insert(6)
 	bstree.Insert(4)
+	bstree.Insert(3)
 
-	t.Logf("%s\n", bstree.PrintTree())
+	t.Logf("%d\n", bstree.Find(3))
 }

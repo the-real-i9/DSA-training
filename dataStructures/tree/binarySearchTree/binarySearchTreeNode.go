@@ -56,3 +56,23 @@ func (b *BinarySearchTreeNode) Insert(value any) {
 
 	}
 }
+
+func (b *BinarySearchTreeNode) Find(value any) any {
+	if b.nodeValueComparator.Equal(b.Value, value) {
+		return b.Value
+	}
+
+	if b.nodeValueComparator.LessThan(value, b.Value) {
+		return b.Left.Find(value)
+	}
+
+	if b.nodeValueComparator.GreaterThan(value, b.Value) {
+		return b.Right.Find(value)
+	}
+
+	return nil
+}
+
+func (b *BinarySearchTreeNode) Contains(value any) bool {
+	return b.Find(value) != nil
+}
