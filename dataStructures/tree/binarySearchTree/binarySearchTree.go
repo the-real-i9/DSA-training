@@ -21,7 +21,15 @@ func (b *BinarySearchTree) Insert(value any) {
 }
 
 func (b *BinarySearchTree) Find(value any) any {
-	return b.Root.Find(value)
+	return b.Root.find(value).Value
+}
+
+func (b *BinarySearchTree) FindMin(value any) any {
+	return b.Root.findMin().Value
+}
+
+func (b *BinarySearchTree) FindMax(value any) any {
+	return b.Root.findMax().Value
 }
 
 func (b *BinarySearchTree) Contains(value any) bool {

@@ -153,3 +153,11 @@ func (b *BinarySearchTreeNode) findMin() *BinarySearchTreeNode {
 
 	return b.Left.findMin()
 }
+
+func (b *BinarySearchTreeNode) findMax() *BinarySearchTreeNode {
+	if b.Right == nil {
+		return b
+	}
+
+	return b.Right.findMax()
+}
