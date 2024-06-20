@@ -1,6 +1,26 @@
-package binarySearchTree
+package binaryTreeNode
 
-func (b BinarySearchTreeNode) LeftHeight() int {
+import "dsa/utils/comparator"
+
+/* type User struct {
+	Id       int    `json:"id"`
+	Username string `json:"username"`
+	Name     string `json:"name"`
+} */
+
+func NewBinaryTreeNode(value any) *BinaryTreeNode {
+	return &BinaryTreeNode{Value: value, nodeComparator: comparator.NewComparator(nil)}
+}
+
+type BinaryTreeNode struct {
+	Value          any
+	Left           *BinaryTreeNode
+	Right          *BinaryTreeNode
+	parent         *BinaryTreeNode
+	nodeComparator comparator.Comparator
+}
+
+func (b BinaryTreeNode) LeftHeight() int {
 	if b.Left == nil {
 		return 0
 	}
@@ -8,7 +28,7 @@ func (b BinarySearchTreeNode) LeftHeight() int {
 	return b.Left.Height()
 }
 
-func (b BinarySearchTreeNode) RightHeight() int {
+func (b BinaryTreeNode) RightHeight() int {
 	if b.Right == nil {
 		return 0
 	}
@@ -16,16 +36,16 @@ func (b BinarySearchTreeNode) RightHeight() int {
 	return b.Right.Height()
 }
 
-func (b BinarySearchTreeNode) Height() int {
+func (b BinaryTreeNode) Height() int {
 	return max(b.LeftHeight(), b.RightHeight()) + 1
 }
 
-func (b BinarySearchTreeNode) BalanceFactor() int {
+func (b BinaryTreeNode) BalanceFactor() int {
 	return b.LeftHeight() - b.RightHeight()
 }
 
 // A node's parent's sibling
-func (b BinarySearchTreeNode) Uncle() *BinarySearchTreeNode {
+func (b BinaryTreeNode) Uncle() *BinaryTreeNode {
 	// Check if the current node has parent
 	if b.parent == nil {
 		return nil
@@ -53,12 +73,12 @@ func (b BinarySearchTreeNode) Uncle() *BinarySearchTreeNode {
 	return b.parent.parent.Left
 }
 
-func (b *BinarySearchTreeNode) SetValue(value any) {
+func (b *BinaryTreeNode) SetValue(value any) {
 	b.Value = value
 
 }
 
-func (b *BinarySearchTreeNode) SetLeft(node *BinarySearchTreeNode) {
+func (b *BinaryTreeNode) SetLeft(node *BinaryTreeNode) {
 	// if node (parent) currently has a Left child
 	if b.Left != nil {
 
@@ -78,7 +98,7 @@ func (b *BinarySearchTreeNode) SetLeft(node *BinarySearchTreeNode) {
 }
 
 // just like SetLeft, but for the Right child in this case
-func (b *BinarySearchTreeNode) SetRight(node *BinarySearchTreeNode) {
+func (b *BinaryTreeNode) SetRight(node *BinaryTreeNode) {
 	if b.Right != nil {
 		b.Right.parent = nil
 	}
@@ -90,7 +110,7 @@ func (b *BinarySearchTreeNode) SetRight(node *BinarySearchTreeNode) {
 	}
 }
 
-func (b *BinarySearchTreeNode) RemoveChild(nodeToRemove *BinarySearchTreeNode) bool {
+func (b *BinaryTreeNode) RemoveChild(nodeToRemove *BinaryTreeNode) bool {
 	if b.Left != nil && b.nodeComparator.Equal(b.Left, nodeToRemove) {
 		b.Left = nil
 		return true
@@ -104,7 +124,7 @@ func (b *BinarySearchTreeNode) RemoveChild(nodeToRemove *BinarySearchTreeNode) b
 	return false
 }
 
-func (b *BinarySearchTreeNode) ReplaceChild(nodeToReplace *BinarySearchTreeNode, replacementNode *BinarySearchTreeNode) bool {
+func (b *BinaryTreeNode) ReplaceChild(nodeToReplace *BinaryTreeNode, replacementNode *BinaryTreeNode) bool {
 	if nodeToReplace == nil || replacementNode == nil {
 		return false
 	}
@@ -122,7 +142,7 @@ func (b *BinarySearchTreeNode) ReplaceChild(nodeToReplace *BinarySearchTreeNode,
 	return false
 }
 
-func CopyNode(targetNode *BinarySearchTreeNode, sourceNode BinarySearchTreeNode) {
+func CopyNode(targetNode *BinaryTreeNode, sourceNode BinaryTreeNode) {
 	targetNode.SetValue(sourceNode.Value)
 	targetNode.SetLeft(targetNode.Left)
 	targetNode.SetRight(targetNode.Right)
@@ -130,7 +150,7 @@ func CopyNode(targetNode *BinarySearchTreeNode, sourceNode BinarySearchTreeNode)
 
 // In-Order traversal starts from Left child, to parent or root, and, finally, to Right child
 // It traverses the tree, presumably, as a Balanced Tree
-func (b BinarySearchTreeNode) TraverseInOrder() []any {
+func (b BinaryTreeNode) TraverseInOrder() []any {
 	res := []any{}
 
 	// Add Left node

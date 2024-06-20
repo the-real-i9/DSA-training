@@ -1,23 +1,31 @@
 package binarySearchTree
 
-import "dsa/utils/comparator"
+import (
+	"dsa/utils/comparator"
+	"encoding/json"
+)
+
+func NewBinarySearchTree(nodeValueCompareFunction func(a, b any) int) *BinarySearchTree {
+	root := NewBinarySearchTreeNode(nil, nodeValueCompareFunction)
+
+	return &BinarySearchTree{Root: root, nodeComparator: root.nodeComparator}
+}
 
 type BinarySearchTree struct {
-	Root                *BinarySearchTreeNode
-	NodeValueComparator comparator.Comparator
+	Root           *BinarySearchTreeNode
+	nodeComparator comparator.Comparator
 }
 
 func (b *BinarySearchTree) Insert(value any) {
-	newNode := &BinarySearchTreeNode{Value: value, nodeValueComparator: b.NodeValueComparator}
-
-	if b.Root == nil {
-		b.Root = newNode
-		return
-	}
-
 	b.Root.Insert(value)
 }
 
-func (b *BinarySearchTree) Tree() string {
-	return b.Root.Tree()
+func (b *BinarySearchTree) PrintTree() string {
+	t, err := json.MarshalIndent(b, "", "--")
+
+	if err != nil {
+		return err.Error()
+	}
+
+	return string(t)
 }

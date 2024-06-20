@@ -2,8 +2,16 @@ package comparator
 
 import "cmp"
 
+func NewComparator(compareFunction func(a, b any) int) Comparator {
+	if compareFunction == nil {
+		return Comparator{compare: defaultCompareFunction}
+	}
+
+	return Comparator{compare: compareFunction}
+}
+
 type Comparator struct {
-	Compare func(a, b any) int
+	compare func(a, b any) int
 }
 
 func (c Comparator) Equal(a, b any) bool {
@@ -11,7 +19,7 @@ func (c Comparator) Equal(a, b any) bool {
 		return a == b
 	}
 
-	return c.Compare(a, b) == 0
+	return c.compare(a, b) == 0
 }
 
 func (c Comparator) LessThan(a, b any) bool {
@@ -19,7 +27,7 @@ func (c Comparator) LessThan(a, b any) bool {
 		return false
 	}
 
-	return c.Compare(a, b) < 0
+	return c.compare(a, b) < 0
 }
 
 func (c Comparator) GreaterThan(a, b any) bool {
@@ -27,7 +35,7 @@ func (c Comparator) GreaterThan(a, b any) bool {
 		return false
 	}
 
-	return c.Compare(a, b) > 0
+	return c.compare(a, b) > 0
 }
 
 func (c Comparator) LessThanOrEqual(a, b any) bool {
@@ -39,13 +47,13 @@ func (c Comparator) GreaterThanOrEqual(a, b any) bool {
 }
 
 func (c *Comparator) Reverse() {
-	compareOriginal := c.Compare
+	compareOriginal := c.compare
 
-	c.Compare = func(a, b any) int {
+	c.compare = func(a, b any) int {
 		return compareOriginal(b, a)
 	}
 }
 
-func DefaultCompareFunc(a, b any) int {
+func defaultCompareFunction(a, b any) int {
 	return cmp.Compare(a.(int), b.(int))
 }

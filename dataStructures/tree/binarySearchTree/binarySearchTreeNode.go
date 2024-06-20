@@ -4,11 +4,22 @@ import (
 	"dsa/utils/comparator"
 )
 
+func NewBinarySearchTreeNode(value any, compareFunction func(a, b any) int) *BinarySearchTreeNode {
+	return &BinarySearchTreeNode{
+		Value:               value,
+		compareFunction:     compareFunction,
+		nodeComparator:      comparator.NewComparator(nil),
+		nodeValueComparator: comparator.NewComparator(compareFunction),
+	}
+}
+
 type BinarySearchTreeNode struct {
 	Value               any
 	Left                *BinarySearchTreeNode
 	Right               *BinarySearchTreeNode
 	parent              *BinarySearchTreeNode
+	compareFunction     func(a, b any) int
+	nodeComparator      comparator.Comparator
 	nodeValueComparator comparator.Comparator
 }
 
@@ -26,7 +37,7 @@ func (b *BinarySearchTreeNode) Insert(value any) {
 			return
 		}
 
-		newNode := &BinarySearchTreeNode{Value: value, nodeValueComparator: b.nodeValueComparator}
+		newNode := NewBinarySearchTreeNode(value, b.compareFunction)
 		b.SetLeft(newNode)
 
 		return
@@ -40,7 +51,7 @@ func (b *BinarySearchTreeNode) Insert(value any) {
 			return
 		}
 
-		newNode := &BinarySearchTreeNode{Value: value, nodeValueComparator: b.nodeValueComparator}
+		newNode := NewBinarySearchTreeNode(value, b.compareFunction)
 		b.SetRight(newNode)
 
 	}
