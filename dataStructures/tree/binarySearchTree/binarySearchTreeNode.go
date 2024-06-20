@@ -5,10 +5,14 @@ import (
 )
 
 func NewBinarySearchTreeNode(value any, compareFunction func(a, b any) int) *BinarySearchTreeNode {
+	nodeCompareFunction := func(a, b any) int {
+		return compareFunction(a.(*BinarySearchTreeNode).Value, b.(*BinarySearchTreeNode).Value)
+	}
+
 	return &BinarySearchTreeNode{
 		Value:               value,
 		compareFunction:     compareFunction,
-		nodeComparator:      comparator.NewComparator(nil),
+		nodeComparator:      comparator.NewComparator(nodeCompareFunction),
 		nodeValueComparator: comparator.NewComparator(compareFunction),
 	}
 }
@@ -57,22 +61,93 @@ func (b *BinarySearchTreeNode) Insert(value any) {
 	}
 }
 
-func (b *BinarySearchTreeNode) Find(value any) any {
+func (b BinarySearchTreeNode) Find(value any) any {
+	return b.find(value).Value
+}
+
+func (b *BinarySearchTreeNode) find(value any) *BinarySearchTreeNode {
 	if b.nodeValueComparator.Equal(b.Value, value) {
-		return b.Value
+		return b
 	}
 
 	if b.nodeValueComparator.LessThan(value, b.Value) {
-		return b.Left.Find(value)
+		if b.Left != nil {
+			return b.Left.find(value)
+		}
+
+		return nil
 	}
 
 	if b.nodeValueComparator.GreaterThan(value, b.Value) {
-		return b.Right.Find(value)
+		if b.Right != nil {
+			return b.Right.find(value)
+		}
+
+		return nil
 	}
 
 	return nil
 }
 
 func (b *BinarySearchTreeNode) Contains(value any) bool {
-	return b.Find(value) != nil
+	return b.find(value) != nil
+}
+
+func (b *BinarySearchTreeNode) Remove(value any) bool {
+	nodeToRemove := b.find(value)
+
+	if nodeToRemove == nil {
+		return false
+	}
+
+	parent := nodeToRemove.parent
+
+	if nodeToRemove.Left == nil && nodeToRemove.Right == nil {
+		// Node is a leaf and thus has no children
+		if parent != nil {
+			// Node has a parent. Remove this node from the parent
+			parent.RemoveChild(nodeToRemove)
+		} else {
+			// Node has no parent (i.e. root). Just erase the current node value (making it to an empty tree)
+			nodeToRemove.SetValue(nil)
+		}
+	} else if nodeToRemove.Left != nil && nodeToRemove.Right != nil {
+		// Node has two children
+		// Find the next biggest value (minimum value in the right branch)
+		// and replace current value node with that next biggest value
+		nextBiggerNode := nodeToRemove.Right.findMin()
+		if !b.nodeComparator.Equal(nextBiggerNode, nodeToRemove.Right) {
+			b.Remove(nextBiggerNode.Value)
+			nodeToRemove.SetValue(nextBiggerNode.Value)
+		} else {
+			nodeToRemove.SetValue(nodeToRemove.Right.Value)
+			nodeToRemove.SetRight(nodeToRemove.Right.Right)
+		}
+	} else {
+		// Node has only one child
+		// Make this child to be a direct child of current node's parent
+		childNode := nodeToRemove.Left
+		if childNode == nil {
+			childNode = nodeToRemove.Right
+		}
+
+		if parent != nil {
+			parent.ReplaceChild(nodeToRemove, childNode)
+		} else {
+			CopyNode(childNode, nodeToRemove)
+		}
+	}
+
+	// Clear the parent of removed node
+	nodeToRemove.parent = nil
+
+	return true
+}
+
+func (b *BinarySearchTreeNode) findMin() *BinarySearchTreeNode {
+	if b.Left == nil {
+		return b
+	}
+
+	return b.Left.findMin()
 }

@@ -125,7 +125,7 @@ func (b *BinarySearchTreeNode) ReplaceChild(nodeToReplace *BinarySearchTreeNode,
 	return false
 }
 
-func CopyNode(targetNode *BinarySearchTreeNode, sourceNode BinarySearchTreeNode) {
+func CopyNode(targetNode *BinarySearchTreeNode, sourceNode *BinarySearchTreeNode) {
 	targetNode.SetValue(sourceNode.Value)
 	targetNode.SetLeft(targetNode.Left)
 	targetNode.SetRight(targetNode.Right)

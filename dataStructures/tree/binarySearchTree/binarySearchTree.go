@@ -28,6 +28,10 @@ func (b *BinarySearchTree) Contains(value any) bool {
 	return b.Root.Contains(value)
 }
 
+func (b *BinarySearchTree) Remove(value any) bool {
+	return b.Root.Remove(value)
+}
+
 func (b *BinarySearchTree) PrintTree() string {
 	t, err := json.MarshalIndent(b, "", "--")
 
