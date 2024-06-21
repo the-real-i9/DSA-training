@@ -1,53 +1,25 @@
 package HTMLDOM
 
 // Note: All block level elements have first and last text nodes of "\n"
-
 func NewDocument(title string) *DOMTree {
-	htmlElem := &DOMTreeElementNode{
-		TagName:  "HTML",
-		NodeName: "HTML",
-		NodeType: 1,
-	}
 
-	headElem := &DOMTreeElementNode{
-		TagName:  "HEAD",
-		NodeName: "HEAD",
-		NodeType: 1,
-	}
+	htmlElem := NewElementNode("html", NilENPs)
 
-	bodyElem := &DOMTreeElementNode{
-		TagName:  "BODY",
-		NodeName: "BODY",
-		NodeType: 1,
-	}
+	headElem := NewElementNode("head", NilENPs)
 
-	titleElem := &DOMTreeElementNode{
-		TagName:  "TITLE",
-		NodeName: "TITLE",
-		NodeType: 1,
-	}
+	bodyElem := NewElementNode("body", NilENPs)
 
-	titleText := &DOMTreeElementNode{
-		NodeName:  "#text",
-		NodeValue: title,
-		Data:      title,
-		NodeType:  3,
-	}
+	titleElem := NewElementNode("title", NilENPs)
 
-	newLineText := &DOMTreeElementNode{
-		NodeName:  "#text",
-		NodeValue: "\n",
-		Data:      "\n",
-		NodeType:  3,
-	}
+	titleText := NewTextNode(title)
 
-	// insert head
-	// insert title in head
-	// insert body
+	titleElem.AppendChild(titleText)
+	headElem.AppendChild(titleElem)
+	htmlElem.Append(headElem, bodyElem)
 
 	return &DOMTree{Root: htmlElem}
 }
 
 type DOMTree struct {
-	Root *DOMTreeElementNode
+	Root *DOMTreeNode
 }
