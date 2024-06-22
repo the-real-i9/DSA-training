@@ -49,35 +49,35 @@ A <u>self-balancing</u> BST. Each node in a Red-Black tree is assigned a color, 
 - **Prevention of Degeneracy:** By maintaining balance, the tree avoids  degenerating into a linked list, <u>ensuring that the worst-case time complexity remains logarithmic.</u>
 - **Predictable Performance:** Balanced tress provide predictable and consistent performance for various operations.
 
-## Heap
+# Heap
 
 A specialized tree-based data structure that satisfies **the heap property**. Heaps are <u>commonly used to implement **priority queues**</u> and efficiently find the maximum or minimum element in a collection.
 
 A heap is a complete binary tree.
 
-### "The Heap Property"
+## "The Heap Property"
 
 - In a **max-heap**, the value of each node is greater than or equal to the values of its children.
 - In a **min-heap**, the value of each node is less than or equal to the values of its children.
 
-### Types of Heap
+## Types of Heap
 
 - **Binary Heap:** A binary tree with the heap property. It is commonly represented using an array.
 - **Binomial Heap:** A collection of binomial trees where each tree follows the heap property.
 - **Fibonacci Heap:** Used particularly in graph algorithms, such as Dijkstra's algorithm.
 
-### Operations on Heaps
+## Operations on Heaps
 
 - **Heapify:** Converting an array into a heap.
 - **Heap sort:** Using a heap to sort an array efficiently
 - Merging two heaps.
 - General Tree operations, while maintaining the Heap Property.
 
-## Trie (Prefix Tree)
+# Trie (Prefix Tree)
 
 A tree-like data structure used for efficiently <u>storing and retrieving a dynamic set or associative array</u> where the *keys are usually strings*. The term "Trie" comes from the word "retrieval".
 
-### Key Characteristics of Tries
+## Key Characteristics of Tries
 
 - **Tree Structure:** A tree structure where each node represents <u>a character in a key</u> or <u>part of a key</u>.
 - **Node:** Each node contains a character and may have links to its children nodes. The links represent the next possible characters in the key.
@@ -86,7 +86,7 @@ A tree-like data structure used for efficiently <u>storing and retrieving a dyna
 - **Path to a Node:** The path from the root to a node represents a key.
 - **Prefix Property:** <u>Tries excel at handling prefixes,</u> making them <u>suitable for tasks like **autocomplete** with partial keys</u>.
 
-### Operations on Tries
+## Operations on Tries
 
 - **Insertion:** Adding a new key to the Trie involves creating nodes for each character in the key and linking them appropriately.
 - **Search:** Checking whether a key is present in the Trie involves traversing the Trie along the characters of the key.
@@ -96,15 +96,15 @@ A tree-like data structure used for efficiently <u>storing and retrieving a dyna
 
 They are often used in scenarios like autocomplete systems, spell checkers, and IP routers.
 
-## B-Tree
+# B-Tree
 
-A B-Tree (Balanced Tree) is a self-balancing tree data structure that maintains sorted data and allows for efficient search, insertion, and deletion oeprations.
+A B-Tree (Balanced Tree) is a self-balancing tree data structure that maintains sorted data and allows for efficient search, insertion, and deletion operations.
 
 B-Trees are widely used in databases and file systems where large amounts of data need to be stored and efficiently retrieved.
 
 They are designed to provide good performance for both random and sequential access.
 
-### Key Characteristics
+## Key Characteristics
 
 - **Balanced Structure:** B-Trees are designed to be balanced, ensuring that the depth of the tree remains relatively constant. This property allows for efficient search operations.
 - **Sorted Keys:** The keys in each node are stored in sorted order, allowing for efficient search operations using binary search.
@@ -112,7 +112,7 @@ They are designed to provide good performance for both random and sequential acc
 - **Balancing Mechanism:** B-Trees use a balancing mechanism during insertions and deletions to ensure that the tree remains balanced.
 - **Efficient Disk Access:** B-Trees are designed with disk storage in mind, and their structure allows for efficient disk access. Each node in a B-Tree corrensponds to a disk block.
 
-### Additional Operations
+## Additional Operations
 
 - Range Queries
 
