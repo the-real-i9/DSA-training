@@ -143,7 +143,6 @@ func CopyNode(targetNode *BinaryTreeNode, sourceNode BinaryTreeNode) {
 }
 
 // In-Order traversal starts from Left child, to parent or root, and, finally, to Right child
-// It traverses the tree, presumably, as a Balanced Tree
 func (b BinaryTreeNode) TraverseInOrder() []any {
 	res := []any{}
 

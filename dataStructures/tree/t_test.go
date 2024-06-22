@@ -23,7 +23,7 @@ var nodeValueCompareFunction = func(a, b any) int {
 
 func TestBinarySearchTree(t *testing.T) {
 
-	bstree := binarySearchTree.NewBinarySearchTree(nodeValueCompareFunction)
+	bstree := binarySearchTree.NewBinarySearchTree(nil)
 
 	bstree.Insert(User{Id: 8035700462, Username: "i9x", Name: "Kehinde Ogunrinola"})
 	bstree.Insert(User{Id: 8056679557, Username: "dollyp", Name: "Dolapo Olaleye"})
@@ -38,6 +38,18 @@ func TestBinarySearchTree(t *testing.T) {
 
 	bstree.Remove(User{Id: 8065329258})
 
+	/* bstree.Insert(3)
+	bstree.Insert(1)
+	bstree.Insert(4)
+	bstree.Insert(2)
+	bstree.Insert(5)
+	bstree.Insert(15)
+	bstree.Insert(13)
+	bstree.Insert(12)
+	bstree.Insert(9)
+
+	t.Log(bstree.ToString()) */
+
 	// t.Logf("%+v\n", bstree.Contains(User{Id: 8035700462}))
-	t.Log(bstree.PrintTree())
+	// t.Log(bstree.PrintTree())
 }
