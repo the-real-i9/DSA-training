@@ -59,3 +59,11 @@ After an element is inserted into or deleted from a heap, the heap property may 
 **Extraction:** <u>Remove the root and insert the last element of the heap in the root</u>. If this will violate the heap property, sift down the new root (*sink* operation) to reestablish the heap property.
 
 **Replacement:** Remove the root and put the new element in the root and sift down. When compare to extraction followed by insertion, this avoids a sift up step.
+
+## Applications
+
+- **Heapsort**: One of the best methods being in-place and with no quadratic worst-case scenarios.
+- **Selection algorithms**: A heap allows access to the min or max element in constant time, and other selections can be done in sub-linear time on data that is in a heap.
+- **Graph algorithms**: By using heaps as internal traversal data structures, run time will be reduced by polynomial order. Examples of such problems are *Dijkstra's shortest-path algorithm*.
+- **Priority queue**: A priority queue is an abstract concept like "a list" or "a map"; ust as a list can be implemented  with a linked list or ran array, a priority queue can be implemented with a heap or a variety of other methods.
+

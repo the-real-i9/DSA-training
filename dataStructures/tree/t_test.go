@@ -2,8 +2,21 @@ package tree
 
 import (
 	"dsa/dataStructures/tree/binarySearchTree"
+	"fmt"
 	"testing"
 )
+
+func TestSmth(t *testing.T) {
+	x := func(x *int) {
+		if x == nil {
+			i := 0
+			x = &i
+		}
+		fmt.Println(*x)
+	}
+
+	x(nil)
+}
 
 type User struct {
 	Id       int    `json:"id"`
@@ -23,7 +36,7 @@ var nodeValueCompareFunction = func(a, b any) int {
 
 func TestBinarySearchTree(t *testing.T) {
 
-	bstree := binarySearchTree.NewBinarySearchTree(nil)
+	bstree := binarySearchTree.NewBinarySearchTree(nodeValueCompareFunction)
 
 	bstree.Insert(User{Id: 8035700462, Username: "i9x", Name: "Kehinde Ogunrinola"})
 	bstree.Insert(User{Id: 8056679557, Username: "dollyp", Name: "Dolapo Olaleye"})
@@ -50,6 +63,6 @@ func TestBinarySearchTree(t *testing.T) {
 
 	t.Log(bstree.ToString()) */
 
-	// t.Logf("%+v\n", bstree.Contains(User{Id: 8035700462}))
+	t.Logf("%+v\n", bstree.Contains(User{Id: 8035700462}))
 	// t.Log(bstree.PrintTree())
 }
