@@ -19,16 +19,3 @@ type Graph struct {
 	Edges    []*Edge   `json:"edges,omitempty"`
 	Vertices []*Vertex `json:"vertices,omitempty"`
 }
-
-// newvv - new vertex value || gv - existing graph vertex
-func (G *Graph) AddVertex(newvv graph.VertexValue) {
-	for _, gv := range G.Vertices {
-		if newvv.EqualTo(gv.Value) {
-			return
-		}
-	}
-
-	newVertex := &Vertex{Value: newvv}
-
-	G.Vertices = append(G.Vertices, newVertex)
-}
