@@ -1,5 +1,7 @@
 package main
 
+import "dsa/dataStructures/graph/graph_al"
+
 func main() {
 	// lluc.UseSinglyLinkedList()
 	// lluc.UseDoublyLinkedList()
@@ -9,4 +11,5 @@ func main() {
 
 	// queueuc.UseQueue()
 
+	graph_al.Run()
 }
