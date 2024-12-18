@@ -12,7 +12,7 @@ type Vertex struct {
 
 type Edge struct {
 	AdjVert map[*Vertex]*Vertex `json:"adjVertexPair,omitempty"` // Adjacent vertex pair
-	Weight  int                 `json:"weight,omitempty"`        // Weight of edge
+	Weight  graph.EdgeWeight    `json:"weight,omitempty"`        // Weight of edge
 }
 
 type Graph struct {

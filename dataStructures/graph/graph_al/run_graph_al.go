@@ -7,8 +7,8 @@ import (
 )
 
 func Run() {
-	myData := graph.IntVertexVal(5)
-	yourData := graph.IntVertexVal(4)
+	myData := graph.IntVertexValue(5)
+	yourData := graph.IntVertexValue(4)
 
 	/* fmt.Println(myData.Data())
 	fmt.Println(myData.GreaterThan(yourData))
