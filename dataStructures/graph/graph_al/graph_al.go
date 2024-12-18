@@ -18,4 +18,5 @@ type Edge struct {
 type Graph struct {
 	Edges    []*Edge   `json:"edges,omitempty"`
 	Vertices []*Vertex `json:"vertices,omitempty"`
+	Directed bool      `json:"directed,omitempty"`
 }

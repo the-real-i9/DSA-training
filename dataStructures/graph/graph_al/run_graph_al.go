@@ -2,7 +2,6 @@ package graph_al
 
 import (
 	"dsa/dataStructures/graph"
-	"encoding/json"
 	"fmt"
 )
 
@@ -16,11 +15,19 @@ func Run() {
 	fmt.Println(myData.EqualTo(yourData))
 	fmt.Println(myData.EqualTo(myData)) */
 
-	myGraph := &Graph{}
+	myGraph := &Graph{Directed: false}
 	myGraph.AddVertex(myData)
 	myGraph.AddVertex(yourData)
+	myGraph.AddEdge(myData, yourData, nil)
 
-	graphView, _ := json.MarshalIndent(myGraph, "", "  ")
+	/* graphView, err := json.MarshalIndent(myGraph, "", "  ")
+	if err != nil {
+		log.Println(err)
+		return
+	} */
 
-	fmt.Printf("%s\n", graphView)
+	// fmt.Printf("%s\n", graphView)
+	fmt.Println(myGraph.Vertices[0].IncEdges)
+	fmt.Println(myGraph.Vertices[1].IncEdges)
+	fmt.Println(myGraph.Edges)
 }

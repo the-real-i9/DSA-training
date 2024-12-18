@@ -49,13 +49,22 @@ func (G *Graph) AddEdge(gv1v, gv2v graph.VertexValue, newew graph.EdgeWeight) er
 
 	// check if this edge already exists
 	for _, ge := range G.Edges {
-		if ge.AdjVert[vertex1] == vertex2 {
-			return nil
+		if G.Directed {
+			if ge.AdjVert[vertex1] == vertex2 {
+				return nil
+			}
+		} else {
+			if ge.AdjVert[vertex1] == vertex2 || ge.AdjVert[vertex2] == vertex1 {
+				return nil
+			}
 		}
 	}
 
 	newAdjVert := map[*Vertex]*Vertex{vertex1: vertex2}
 	newEdge := &Edge{AdjVert: newAdjVert, Weight: newew}
+
+	vertex1.IncEdges = append(vertex1.IncEdges, newEdge)
+	vertex2.IncEdges = append(vertex2.IncEdges, newEdge)
 
 	G.Edges = append(G.Edges, newEdge)
 
